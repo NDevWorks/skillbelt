@@ -1,0 +1,3 @@
+| product | price | notes |
+| --- | --- | --- |
+| Rice, 5kg | 420 | Store in a "dry" place |

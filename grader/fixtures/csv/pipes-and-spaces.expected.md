@@ -1,0 +1,3 @@
+| command | meaning |
+| --- | --- |
+| a\|b | pipe |

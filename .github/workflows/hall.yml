@@ -1,0 +1,31 @@
+# Checks pull requests that add someone to BLACK_BELTS.md.
+name: Hall
+
+on:
+  pull_request:
+    paths: [BLACK_BELTS.md]
+
+permissions:
+  contents: read
+
+jobs:
+  hall:
+    if: github.repository == 'NDevWorks/skillbelt'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Run the checker from the base branch, so a pull request can't change the rules it's checked by
+      - name: Check the new black belt
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          git show "$BASE_SHA:grader/hall.mjs" > "$RUNNER_TEMP/hall.mjs"
+          node "$RUNNER_TEMP/hall.mjs"

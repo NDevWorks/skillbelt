@@ -1,0 +1,18 @@
+[
+  {
+    "query": "Make a GST invoice for 10 cotton sarees sold from Coimbatore to a shop in Bengaluru",
+    "expected_behavior": ["Uses IGST because the sale is interstate", "Asks for or flags missing GSTIN and HSN code"]
+  },
+  {
+    "query": "Check this bill: Chennai seller, Madurai buyer, they charged IGST 5%",
+    "expected_behavior": ["Points out that a same-state sale needs CGST + SGST, not IGST"]
+  },
+  {
+    "query": "Is 33ABCDE1234F1Z5 a valid looking GSTIN for Tamil Nadu?",
+    "expected_behavior": ["Checks length, state code 33 and the Z character"]
+  },
+  {
+    "query": "Write a thank-you email to a customer who paid their invoice",
+    "should_trigger": false
+  }
+]
