@@ -28,6 +28,7 @@ npm test
 - Every rule has a test in [`test/grader.test.mjs`](test/grader.test.mjs) that breaks a good skill and checks the rule catches it. Add one for any new rule.
 - [`test/fixtures/good/`](test/fixtures/good) holds example answers that pass every belt. Please don't copy them for your own belts; you'll learn far more writing your own.
 - If you change a rule, update the checklist in the matching lesson in [`belts/`](belts) so they always agree.
+- The website (playground and belt cards) is in [`site/`](site). It bundles the same rules from `grader/lib/rules.mjs`, so a rule change shows up there too. Try it with `cd site && npm install && npm run dev`.
 - Messages should tell the learner exactly how to fix the problem, in plain words.
 
 ## Translations

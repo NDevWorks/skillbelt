@@ -10,6 +10,8 @@ A **skill** is a folder with a `SKILL.md` file that teaches an AI agent how to d
 
 Skills are easy to start and easy to get wrong. A vague description and the agent never uses your skill. A 2,000-line SKILL.md and it wastes tokens on every request. Skillbelt teaches the rules by having you write skills and checking them, one belt at a time.
 
+**Just want to try it?** Open the **[playground](https://skillbelt.vercel.app)**: write a skill in your browser and watch the checks for every belt update as you type. No install, no sign-up, and you can share a link to your skill.
+
 ## How it works
 
 1. **Fork** this repo.
@@ -62,6 +64,12 @@ After your first push, add this to your GitHub profile README or your fork's REA
 ```
 
 It updates itself each time you earn a belt.
+
+## Share your belt card
+
+Every belt you earn also gets you a card with your GitHub picture, your belt and the skills you wrote. After a push, the Actions summary links to it, or open `https://skillbelt.vercel.app/card/?u=YOUR-USERNAME`. Download the image for LinkedIn or X, or share the link.
+
+![A belt card: avatar, Green belt, and the skill written for each belt](docs/card.png)
 
 ## Hall of Black Belts
 

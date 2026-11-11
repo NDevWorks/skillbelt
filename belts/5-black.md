@@ -105,4 +105,4 @@ When every belt passes, push. Your badge turns black.
 - **Changing other files in the Hall pull request.** Only `BLACK_BELTS.md`.
 - **Editing the hall from your fork's copy** that's behind the original. Edit it on the original repo so you add to the latest list.
 
-🥋 Then share your skill. Every black-belt skill in the hall is something another person can install.
+🥋 Then share it: your belt card is at `https://skillbelt.vercel.app/card/?u=YOUR-USERNAME`, with an image you can post. Share your skill too. Every black-belt skill in the hall is something another person can install.

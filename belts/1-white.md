@@ -83,6 +83,8 @@ The grader checks:
 - [ ] Has instructions below the frontmatter (at least a few lines)
 - [ ] Uses forward slashes in paths
 
+Want quick feedback while you write? Paste your SKILL.md into the [playground](https://skillbelt.vercel.app). It runs the same checks in your browser.
+
 Check your work:
 
 ```bash
