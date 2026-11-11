@@ -24,7 +24,7 @@ npm install
 npm test
 ```
 
-- Rules live in [`grader/lib/skill.mjs`](grader/lib/skill.mjs) (format, descriptions, references) and [`grader/lib/belts.mjs`](grader/lib/belts.mjs) (scripts, evals, belt order).
+- Rules live in [`grader/lib/rules.mjs`](grader/lib/rules.mjs) (no Node.js imports, so the website can use them too). [`grader/lib/belts.mjs`](grader/lib/belts.mjs) adds the Blue belt checks that run the learner's script.
 - Every rule has a test in [`test/grader.test.mjs`](test/grader.test.mjs) that breaks a good skill and checks the rule catches it. Add one for any new rule.
 - [`test/fixtures/good/`](test/fixtures/good) holds example answers that pass every belt. Please don't copy them for your own belts; you'll learn far more writing your own.
 - If you change a rule, update the checklist in the matching lesson in [`belts/`](belts) so they always agree.
