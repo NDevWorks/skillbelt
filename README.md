@@ -45,22 +45,13 @@ You need [Node.js 20+](https://nodejs.org). The Blue belt also accepts Python 3,
 
 Belts are earned in order. Each one adds rules to the ones before.
 
-## What the grader looks like
+## What you see after a push
 
-```
-Skillbelt
+Every push runs the grader in your fork's **Actions** tab. Passed belts fold into one line, and each failed check tells you exactly how to fix it:
 
-● White belt (my-belt/white/writing-commit-messages)  11/11 checks
-● Yellow belt (my-belt/yellow/formatting-addresses)  15/16 checks
-   ✗ Description says when to use it
-     Add a trigger sentence, like: "Use when the user asks for ...".
-○ Green belt  not started. Read belts/3-green.md
+![The grade summary on GitHub Actions: White and Yellow passed, a table of the two failed Green belt checks with how to fix each](docs/summary.png)
 
-Your belt: White belt
-Next: Yellow belt. Read belts/2-yellow.md
-```
-
-Every failed check tells you how to fix it. Run one belt with `npm run grade -- yellow` to see each check that passed too.
+Locally, `npm run grade` shows the same report. Run one belt with `npm run grade -- yellow` to see every check that passed too.
 
 ## Show your belt
 
