@@ -240,9 +240,9 @@ export const disclosureRules = [
       const refs = listFiles(s.dir, "references").filter((f) => f.endsWith(".md"));
       const linked = new Set(relativeLinks(s.body).map((l) => path.posix.normalize(l)));
       const missing = refs.filter((r) => !linked.has(r));
-      return missing.length
-        ? `Link to ${missing.map((m) => `\`${m}\``).join(", ")} from SKILL.md, e.g. [style guide](${missing[0]}). Unlinked files are never found.`
-        : null;
+      if (!missing.length) return null;
+      const text = path.posix.basename(missing[0], ".md").replace(/-/g, " ");
+      return `Link to ${missing.map((m) => `\`${m}\``).join(", ")} from SKILL.md, e.g. \`[${text}](${missing[0]})\`. Unlinked files are never found.`;
     },
   },
   {

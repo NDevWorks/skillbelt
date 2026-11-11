@@ -86,13 +86,23 @@ if (summaryPath) {
     : `Every belt earned. Add yourself to the [Hall of Black Belts](https://github.com/NDevWorks/skillbelt/blob/main/belts/5-black.md#join-the-hall-of-black-belts)!\n\n`;
   for (const g of grades) {
     if (g.status === "todo") {
-      md += `### ○ ${g.belt.title}: not started\n\n`;
+      md += `○ ${g.belt.title}: not started<br>\n\n`;
       continue;
     }
-    md += `### ${g.status === "pass" ? "✅" : "❌"} ${g.belt.title}${g.skill ? ` · \`${path.relative(ROOT, g.skill.dir)}\`` : ""}\n\n`;
+    const where = g.skill ? ` · <code>${path.relative(ROOT, g.skill.dir).split(path.sep).join("/")}</code>` : "";
+    const passed = g.results.filter((r) => r.ok).length;
+    if (g.status === "pass") {
+      // Passing belts fold into one line, so failures stand out
+      md += `<details><summary><strong>✅ ${g.belt.title}</strong>${where} · ${passed}/${g.results.length} checks</summary>\n\n`;
+      md += "| | Check |\n|---|---|\n";
+      for (const r of g.results) md += `| ✅ | ${esc(r.label)} |\n`;
+      md += "\n</details>\n\n";
+      continue;
+    }
+    md += `### ❌ ${g.belt.title}${where} · ${passed}/${g.results.length} checks\n\n`;
     md += "| | Check | How to fix |\n|---|---|---|\n";
-    for (const r of g.results) md += `| ${r.ok ? "✅" : "❌"} | ${esc(r.label)} | ${r.ok ? "" : esc(r.message)} |\n`;
-    md += "\n";
+    for (const r of g.results.filter((r) => !r.ok)) md += `| ❌ | ${esc(r.label)} | ${esc(r.message)} |\n`;
+    md += `\n${passed} other checks passed.\n\n`;
   }
   fs.appendFileSync(summaryPath, md);
 }

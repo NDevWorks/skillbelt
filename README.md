@@ -4,6 +4,8 @@
 
 ![White belt](https://img.shields.io/badge/1-white_belt-lightgrey) ![Yellow belt](https://img.shields.io/badge/2-yellow_belt-yellow) ![Green belt](https://img.shields.io/badge/3-green_belt-brightgreen) ![Blue belt](https://img.shields.io/badge/4-blue_belt-blue) ![Black belt](https://img.shields.io/badge/5-black_belt-black)
 
+![The Skillbelt grader in a terminal: White and Yellow belts passed, Green belt failing with a broken link and the exact fix](docs/grader.png)
+
 A **skill** is a folder with a `SKILL.md` file that teaches an AI agent how to do one task well: reviewing leases, formatting invoices, converting files, following your team's release process. Claude Code and other agents that support the open [Agent Skills format](https://agentskills.io) load them automatically when a request matches.
 
 Skills are easy to start and easy to get wrong. A vague description and the agent never uses your skill. A 2,000-line SKILL.md and it wastes tokens on every request. Skillbelt teaches the rules by having you write skills and checking them, one belt at a time.
