@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skillbelt belt card</title>
+  <meta name="description" content="A shareable card of the belts someone earned on Skillbelt, the free course for writing AI agent skills.">
+  <meta property="og:title" content="Skillbelt belt card">
+  <meta property="og:description" content="Belts earned on Skillbelt, the free course for writing AI agent skills (SKILL.md).">
+  <meta property="og:image" content="https://skillbelt.vercel.app/social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥋</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Schibsted+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">Skillbelt</a>
+    <nav>
+      <a href="/">Playground</a>
+      <a href="https://github.com/NDevWorks/skillbelt#readme">Course</a>
+      <a href="https://github.com/NDevWorks/skillbelt">GitHub</a>
+    </nav>
+  </header>
+
+  <main class="card-page">
+    <section class="intro">
+      <h1 id="title">Belt cards</h1>
+      <p id="lede">Everyone who takes the Skillbelt course gets a card showing their belts and the skills they wrote. Enter a GitHub username to see theirs.</p>
+    </section>
+
+    <form class="lookup" id="lookup">
+      <label for="user" class="sr-only">GitHub username</label>
+      <input id="user" placeholder="github-username" spellcheck="false" autocomplete="off" autocapitalize="off">
+      <button class="btn" type="submit">Show card</button>
+    </form>
+
+    <p class="status" id="status" role="status"></p>
+
+    <div class="card-wrap" id="card-wrap" hidden>
+      <canvas id="card" width="1200" height="630" role="img"></canvas>
+      <div class="card-actions">
+        <button class="btn" id="download">Download image</button>
+        <a class="btn btn-quiet" id="share-linkedin" target="_blank" rel="noopener">Share on LinkedIn</a>
+        <a class="btn btn-quiet" id="share-x" target="_blank" rel="noopener">Share on X</a>
+        <button class="btn btn-quiet" id="copy">Copy link</button>
+      </div>
+      <p class="status">Tip: on LinkedIn, attach the downloaded image to your post so the card shows in full.</p>
+
+      <div class="snippet">
+        <h2>Put your belt on your GitHub profile</h2>
+        <p class="status">Paste this into your profile README. It updates by itself when you earn a new belt.</p>
+        <pre id="snippet"></pre>
+        <button class="btn btn-quiet" id="copy-snippet">Copy</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <p>Cards read the progress file the Skillbelt grader publishes on each learner's fork. <a href="https://github.com/NDevWorks/skillbelt">Start the course</a>.</p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script type="module" src="/card.js"></script>
+</body>
+</html>

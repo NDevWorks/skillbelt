@@ -9,6 +9,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { BELTS, gradeAll } from "./lib/belts.mjs";
+import { SITE } from "./lib/rules.mjs";
 
 const args = process.argv.slice(2);
 const flag = (name) => {
@@ -74,6 +75,31 @@ if (badgePath) {
   fs.writeFileSync(badgePath, JSON.stringify(badge, null, 2) + "\n");
 }
 
+// ---------- Progress for the shareable belt card ----------
+
+const user = flag("--user") ?? process.env.GITHUB_REPOSITORY_OWNER ?? null;
+const progressPath = flag("--progress");
+if (progressPath) {
+  const skills = {};
+  for (const g of grades) {
+    if (g.status !== "pass" || !g.skill?.frontmatter) continue;
+    const { name, description } = g.skill.frontmatter;
+    skills[g.belt.id] = { name: String(name), description: String(description).slice(0, 300) };
+  }
+  const progress = {
+    schemaVersion: 1,
+    user,
+    belt: earned?.id ?? null,
+    passed: grades.filter((g) => g.status === "pass").map((g) => g.belt.id),
+    skills,
+    updated: new Date().toISOString(),
+  };
+  fs.mkdirSync(path.dirname(progressPath), { recursive: true });
+  fs.writeFileSync(progressPath, JSON.stringify(progress, null, 2) + "\n");
+}
+const cardUrl = earned && user ? `${SITE}/card/?u=${encodeURIComponent(user)}` : null;
+if (cardUrl && process.env.GITHUB_ACTIONS) console.log(`Share your belt card: ${cardUrl}\n`);
+
 // ---------- GitHub Actions job summary ----------
 
 const summaryPath = flag("--summary");
@@ -81,6 +107,7 @@ if (summaryPath) {
   const esc = (t) => t.replace(/\|/g, "\\|").replace(/\n/g, "<br>");
   let md = `## ${earned ? `🥋 ${earned.title}` : "No belt yet"}\n\n`;
   const repo = process.env.GITHUB_REPOSITORY ? `${process.env.GITHUB_SERVER_URL ?? "https://github.com"}/${process.env.GITHUB_REPOSITORY}/blob/HEAD/` : "";
+  if (cardUrl) md += `**[Get your belt card](${cardUrl})** to share on LinkedIn or X.\n\n`;
   md += next
     ? `Next up: **${next.title}**. Read [${next.lesson}](${repo}${next.lesson}).\n\n`
     : `Every belt earned. Add yourself to the [Hall of Black Belts](https://github.com/NDevWorks/skillbelt/blob/main/belts/5-black.md#join-the-hall-of-black-belts)!\n\n`;

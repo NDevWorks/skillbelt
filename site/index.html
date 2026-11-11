@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Skillbelt playground</title>
+  <meta name="description" content="Write an AI agent skill (SKILL.md) and see which belt it earns, live in your browser. Free, no sign-up.">
+  <meta property="og:title" content="Skillbelt playground">
+  <meta property="og:description" content="Write an AI agent skill (SKILL.md) and see which belt it earns, live in your browser.">
+  <meta property="og:image" content="https://skillbelt.vercel.app/social-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥋</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Schibsted+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip" href="#editor">Skip to the editor</a>
+  <header class="top">
+    <a class="brand" href="/">Skillbelt</a>
+    <nav>
+      <a href="/card/">Belt cards</a>
+      <a href="https://github.com/NDevWorks/skillbelt#readme">Course</a>
+      <a href="https://github.com/NDevWorks/skillbelt">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h1>Write a skill. See your belt.</h1>
+      <p>Agent skills are folders with a <code>SKILL.md</code> that teach an AI agent one task. Edit one here and the same checks as the Skillbelt course run as you type. Nothing leaves your browser.</p>
+    </section>
+
+    <div class="work">
+      <section class="pane editor-pane" aria-labelledby="editor-title">
+        <div class="pane-head">
+          <h2 id="editor-title">Your skill</h2>
+          <label class="example">
+            <span class="sr-only">Open an example</span>
+            <select id="example">
+              <option value="">Open an example…</option>
+              <option value="vague">A weak skill to fix</option>
+              <option value="green">Green belt example</option>
+              <option value="black">Black belt example</option>
+              <option value="blank">Blank skill</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="folder">
+          <span>Folder</span>
+          <span class="path">my-belt/&lt;belt&gt;/</span><input id="folder" spellcheck="false" autocomplete="off" aria-label="Skill folder name"><span class="path">/</span>
+        </label>
+
+        <div class="tabs" id="tabs" role="tablist" aria-label="Files in this skill"></div>
+
+        <div class="code">
+          <pre class="gutter" id="gutter" aria-hidden="true"></pre>
+          <textarea id="editor" spellcheck="false" autocapitalize="off" autocomplete="off" wrap="off"></textarea>
+        </div>
+
+        <form class="add" id="add-form">
+          <label for="new-file">Add a file</label>
+          <input id="new-file" placeholder="references/guide.md" spellcheck="false" autocomplete="off">
+          <button type="submit">Add</button>
+          <span class="suggest">Try:
+            <button type="button" data-suggest="references/guide.md">references/</button>
+            <button type="button" data-suggest="evals/evals.json">evals/</button>
+            <button type="button" data-suggest="scripts/csv_to_table.py">scripts/</button>
+          </span>
+        </form>
+
+        <div class="actions">
+          <button id="share" class="btn">Copy share link</button>
+          <button id="download" class="btn btn-quiet">Download .zip</button>
+        </div>
+      </section>
+
+      <section class="pane results-pane" aria-labelledby="belt-title" aria-live="polite">
+        <div class="belt-head">
+          <div id="belt" class="belt"></div>
+          <div>
+            <h2 id="belt-title">No belt yet</h2>
+            <p id="belt-sub"></p>
+          </div>
+        </div>
+
+        <div class="belts" id="belts" role="tablist" aria-label="Belts"></div>
+
+        <h3 id="checks-title" class="sr-only">Checks</h3>
+        <div id="checks"></div>
+      </section>
+    </div>
+
+    <section class="next">
+      <h2>Earn the belts for real</h2>
+      <p>The course on GitHub has a lesson for each belt. Fork it, write a skill per belt, and every push updates a badge on your fork. Finish all five and you get a belt card to share and a place in the Hall of Black Belts.</p>
+      <a class="btn" href="https://github.com/NDevWorks/skillbelt">Start the course on GitHub</a>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Skillbelt is free and open source (MIT). Rules follow the <a href="https://agentskills.io/specification">Agent Skills specification</a>.</p>
+  </footer>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

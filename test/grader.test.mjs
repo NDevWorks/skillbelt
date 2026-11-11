@@ -239,3 +239,28 @@ test("nothing bundled", () =>
     }),
     "scripts/ or references/"
   ));
+
+// ---------- Browser playground: rules on an in-memory skill ----------
+
+import { exists, normalize, parseSkill } from "../grader/lib/rules.mjs";
+
+test("in-memory skills: paths and links", () => {
+  assert.equal(normalize("references/./a/../b.md"), "references/b.md");
+  assert.equal(normalize("../outside.md"), null);
+  const s = parseSkill({ folder: "x", files: { "SKILL.md": "---\nname: x\ndescription: y\n---\nbody", "references/a.md": "# A" } });
+  assert.ok(exists(s, "references/a.md"));
+  assert.ok(exists(s, "references"));
+  assert.ok(!exists(s, "../references/a.md"));
+  assert.equal(s.frontmatter.name, "x");
+});
+
+test("in-memory skill grades the same as on disk", () => {
+  const dir = path.join(GOOD, "my-belt", "green", "reviewing-rental-agreements");
+  const files = {};
+  for (const f of ["SKILL.md", "references/typical-terms.md", "references/red-flags.md"]) files[f] = fs.readFileSync(path.join(dir, f), "utf8");
+  const g = gradeBelt(GOOD, BELTS.find((b) => b.id === "green"));
+  const skill = parseSkill({ folder: "reviewing-rental-agreements", files });
+  const results = BELTS.find((b) => b.id === "green").rules.map((r) => r.check(skill) === null);
+  assert.ok(results.every(Boolean));
+  assert.equal(g.status, "pass");
+});

@@ -23,7 +23,7 @@ jobs:
       - run: npm ci
 
       - name: Grade my-belt/
-        run: node grader/grade.mjs --summary "$GITHUB_STEP_SUMMARY" --badge out/belt.json
+        run: node grader/grade.mjs --summary "$GITHUB_STEP_SUMMARY" --badge out/belt.json --progress out/progress.json
 
       # Publishes out/belt.json to the `badges` branch of your fork, for the README badge
       - name: Update badge
@@ -36,7 +36,7 @@ jobs:
           git init -q -b badges
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add belt.json
+          git add belt.json progress.json
           git commit -qm "Update belt badge"
           git push -qf "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" badges
           echo "Badge: $(cat belt.json | tr -d '\n ')"
